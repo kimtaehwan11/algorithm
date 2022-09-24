@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	int n, m, min = 32;
+	cin >> n >> m;
+	int** matrix = new int*[n];
+	char** char_matrix = new char*[n];
+	for(int i=0; i<n; i++){
+		matrix[i] = new int[m];
+		char_matrix[i] = new char[m];
+	}
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			cin >> char_matrix[i][j];
+			if(char_matrix[i][j] == 'B'){
+				matrix[i][j] = 0;
+			}
+			else{matrix[i][j] = 1;}
+		}
+	}
+	for(int i=0; i<n-7; i++){
+		for(int j=0; j<m-7; j++){
+			int sum = 0;
+			for(int k=0; k<8; k++){
+				for(int l=0; l<8; l++){
+					if((k+l) % 2 == matrix[k+i][l+j]){
+					sum +=1;
+					}
+				}
+			}
+			sum = 32 - abs(sum-32);
+			if(sum < min){
+				min = sum;
+			}
+		}
+	}
+	cout << min;
+	
+	return 0;
+}
