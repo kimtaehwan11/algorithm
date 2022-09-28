@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+
+int fibonacci(int n) {
+    if (n == 0) {
+        return 0;
+    } else if (n == 1) {
+        return 1;
+    } else {
+    	int x = 0, y = 1;
+        for(int i=0; i<n-1; i++) {
+        	int tmp = y;
+        	y += x;
+        	x = tmp;
+        }
+        return y;
+    }
+}
+
+int main() {
+	int n;
+	cin >> n;
+	for(int i=0; i<n; i++) {
+		int x;
+		cin >> x;
+		cout << fibonacci(x-1) << " " << fibonacci(x) << endl;
+	}
+	
+	return 0;
+}
+
+/*
+#include <iostream>
+using namespace std;
+
+struct Count
+{
+	int zero;
+	int one;
+};
+
+Count fibonacci[41];
+
+int main()
+{
+	int T;
+	scanf("%d", &T);
+
+	// 피보나치 배열 생성
+	fibonacci[0].zero = 1;
+	fibonacci[0].one = 0;
+	fibonacci[1].zero = 0;
+	fibonacci[1].one = 1;
+
+	for (int i = 2; i <= 40; i++)
+	{
+		fibonacci[i].zero = fibonacci[i - 1].zero + fibonacci[i - 2].zero;
+		fibonacci[i].one = fibonacci[i - 1].one + fibonacci[i - 2].one;
+	}
+
+	for (int i = 0; i < T; i++)
+	{
+		int N;
+		scanf("%d", &N);
+
+		printf("%d %d\n", fibonacci[N].zero, fibonacci[N].one);
+	}
+
+	return 0;
+}
+*/
