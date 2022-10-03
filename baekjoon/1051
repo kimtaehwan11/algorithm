@@ -1,0 +1,35 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	int n, m, len;
+	char base[50][50];
+	bool exist = false;
+	
+	cin >> n >> m;
+	len = min(n, m);
+	
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			cin >> base[i][j];
+		}
+	}
+	
+	while(!exist){
+		for(int i=0; i<n+1-len; i++){
+			for(int j=0; j<m+1-len; j++){
+				if(base[i][j] == base[i][j+len-1] &&
+				base[i][j+len-1] == base[i+len-1][j+len-1] &&
+				base[i+len-1][j+len-1] == base[i+len-1][j]){
+					exist = true;
+				}
+			}
+		}
+		if (!exist)	len -= 1;
+	}
+	
+	cout << len * len;
+	
+	return 0;
+}
