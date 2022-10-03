@@ -1,0 +1,32 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	int n, m, sixMin, oneMin;
+	int six[50], one[50];
+	
+	cin >> n >> m;
+	for(int i=0; i<m; i++){
+		cin >> six[i] >> one[i];
+	}
+	
+	sixMin = six[0];
+	oneMin = one[0];
+	
+	for(int i=0; i<m; i++){
+		if(six[i] < sixMin) sixMin = six[i];
+		if(one[i] < oneMin) oneMin = one[i]; 
+	}
+	
+	if(6 * oneMin <= sixMin){
+		cout << n * oneMin;
+	} else{
+		int quo, rem;
+		quo = n / 6;
+		rem = n % 6;
+		cout << min(quo * sixMin + rem * oneMin, (quo + 1) * sixMin);
+	}
+
+	return 0;
+}
