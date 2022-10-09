@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// 행성 안에 존재하는 경우를 true, 밖에 존재하면 false로 설정.
+bool inTheGalaxy(int x1, int y1, int cx, int cy, int r){
+	int len = sqrt((cx - x1) * (cx - x1) + (cy - y1) * (cy - y1));
+	if(len < r){
+		return true;
+	} else{return false;}
+}
+
+int main() {
+	int T;
+	cin >> T;
+	
+	for(int i=0; i<T; i++){
+		int x1, y1, x2, y2, n;
+		int count = 0;
+		bool startPoint[50], endPoint[50];
+		// each boolean expresses whether in the galaxy or not
+		cin >> x1 >> y1 >> x2 >> y2 >> n;
+		
+		for(int j=0; j<n; j++){
+			int cx, cy, r;
+			cin >> cx >> cy >> r;
+			
+			startPoint[j] = inTheGalaxy(x1, y1, cx, cy, r);
+			endPoint[j] = inTheGalaxy(x2, y2, cx, cy, r);
+		}
+		
+		for(int j=0; j<n; j++){
+			if(startPoint[j] != endPoint[j]){count++;}
+		}
+		
+		cout << count << endl;
+	}
+	
+	return 0;
+}
