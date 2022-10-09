@@ -1,0 +1,19 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+	int X, count = 0;
+	cin >> X;
+	
+	for(int i=0; i<7; i++){
+		if(X >= pow(2, 6-i)){
+			X -= pow(2, 6-i);
+			count += 1;
+		}
+	}
+	
+	cout << count;
+	
+	return 0;
+}
