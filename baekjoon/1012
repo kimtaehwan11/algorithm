@@ -1,0 +1,65 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool inTheRange(int a, int b, int x){
+	if(a <= x and x < b){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+void changeIfSameArea(auto land, auto& check, int i, int j){
+	int n = land.size();
+	int m = land[0].size();
+	if(inTheRange(0, n, i) and inTheRange(0, m, j) and land[i][j] == 1){
+		check[i][j] = 1;
+	}
+}
+
+int main() {
+	int T;
+	cin >> T;
+	
+	for(int i=0; i<T; i++){
+		int M, N, K, count = 0;
+		cin >> M >> N >> K;
+		vector<vector<int>> land(N, vector<int>(M, 0));
+		vector<vector<int>> check(N, vector<int>(M, 0));
+		
+		for(int i=0; i<K; i++){
+			int row, col;
+			cin >> col >> row;
+			
+			land[row][col] = 1;
+		}
+		
+		for(int i=0; i<N; i++){
+			for(int j=0; j<M; j++){
+				if(land[i][j] == 1 and check[i][j] == 0){
+					count++;
+					check[i][j] = 1;
+					
+					
+					// use bfs method
+					while(true){
+						auto tmp = check;
+						
+						changeIfSameArea(land, check, i-1, j);
+						// changeIfSameArea(land, check, i, j-1);
+						changeIfSameArea(land, check, i+1, j);
+						changeIfSameArea(land, check, i, j+1);
+						
+						if(tmp == check) break;
+					}
+				}
+			}
+		}
+		
+		cout << count << endl;
+	}
+	
+	return 0;
+}
