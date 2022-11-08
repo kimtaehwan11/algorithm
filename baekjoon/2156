@@ -1,0 +1,21 @@
+n = int(input())
+
+l = []
+minList = [0] * n
+
+for _ in range(n):
+	l.append(int(input()))
+
+if 1 <= n <= 2:
+	print(sum(l))
+else:
+	minList[0] = l[0]
+	minList[1] = l[1]
+	minList[2] = l[2]
+	
+	for i in range(3, n):
+		minList[i] = min(minList[i-3], minList[i-2], minList[i-1]) + l[i]
+		
+	minVal = min(minList[n-3], minList[n-2], minList[n-1])
+	
+	print(sum(l) - minVal)
