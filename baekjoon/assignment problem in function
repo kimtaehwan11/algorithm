@@ -1,0 +1,10 @@
+def foo(l):
+	nl = [1, 2, 3]
+	l = nl # not works
+
+nl = []
+l = [0, 1, 2, 3]
+ 
+foo(l)
+
+print(l)
