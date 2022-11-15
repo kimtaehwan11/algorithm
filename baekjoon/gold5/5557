@@ -1,0 +1,22 @@
+def foo(cl, x):
+	ncl = [0] * 22
+	
+	for i in range(21):
+		if 0 <= i-x <= 20:
+			ncl[i] += cl[i-x] 
+		if 0 <= i+x <= 20:
+			ncl[i] += cl[i+x]
+	
+	for i in range(21):
+		cl[i] = ncl[i]
+
+n = int(input())
+l = list(map(int, input().split()))
+
+cl = [0] * 22 # cl is count list
+cl[l[0]] = 1
+
+for i in range(n-2):
+	foo(cl, l[i+1])
+
+print(cl[l[n-1]])
