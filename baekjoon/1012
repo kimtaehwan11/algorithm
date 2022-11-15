@@ -1,0 +1,32 @@
+import sys
+sys.setrecursionlimit(10**9)
+
+def change(l, tl, x, y):
+	tl[x][y] = 1
+	dx = [-1, 1, 0, 0]
+	dy = [0, 0, -1, 1]
+	for i in range(4):
+		nx = x + dx[i]
+		ny = y + dy[i]
+		if(not(0 <= nx < len(l) and 0 <= ny < len(l[0]))): continue
+		if(l[nx][ny] == 1 and tl[nx][ny] == 0):
+			change(l, tl, nx, ny)
+
+T = int(input())
+for _ in range(T):
+	m, n, k = map(int, input().split())
+	l = [[0] * n for _ in range(m)]
+	tl = [[0] * n for _ in range(m)]
+	result = 0
+	
+	for _ in range(k):
+		x, y = map(int, input().split())
+		l[x][y] = 1
+		
+	for i in range(m):
+		for j in range(n):
+			if(l[i][j] == 1 and tl[i][j] == 0):
+				change(l, tl, i, j)
+				result += 1
+	
+	print(result)
