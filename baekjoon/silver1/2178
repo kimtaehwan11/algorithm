@@ -1,0 +1,27 @@
+from collections import deque
+
+def bfs(graph, start, visited):
+	visited[start[0]][start[1]] = True
+	dq = deque([start])
+	while dq:
+		node = dq.popleft()
+		row = node[0]
+		col = node[1]
+		dr = [-1, 1, 0, 0]
+		dc = [0, 0, -1, 1]
+		for i in range(4):
+			nr = row + dr[i]
+			nc = col + dc[i]
+			if not(0 <= nr < len(graph) and 0 <= nc < len(graph[0])): continue
+			if graph[nr][nc] != 0 and not visited[nr][nc]:
+				graph[nr][nc] = graph[row][col] + 1
+				dq.append((nr, nc))
+				visited[nr][nc] = True
+		
+	return graph[-1][-1]
+
+n, m = map(int, input().split())
+graph = [[int(i) for i in input()] for _ in range(n)]
+start = (0, 0)
+visited = [[False] * m for _ in range(n)]
+print(bfs(graph, start, visited))
