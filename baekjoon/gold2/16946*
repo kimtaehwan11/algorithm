@@ -1,0 +1,31 @@
+from collections import deque
+
+def bfs(graph, start):
+	if graph[start[0]][start[1]] == 0: return 0
+	visited = [[False] * m for _ in range(n)]
+	visited[start[0]][start[1]] = True
+	count = 1
+	dq = deque([start])
+	while dq:
+		node = dq.popleft()
+		for i in range(4):
+			row = node[0] + dr[i]
+			col = node[1] + dc[i]
+			if row < 0 or row >= n or col < 0 or col >= m:
+				continue
+			if graph[row][col] == 0 and not visited[row][col]:
+				count += 1
+				visited[row][col] = True
+				dq.append((row, col))
+				
+	return count % 10
+
+n, m = map(int, input().split())
+graph = [[int(i) for i in input()] for _ in range(n)]
+dr = [-1, 1, 0, 0]
+dc = [0, 0, -1, 1]
+
+for i in range(n):
+	for j in range(m):
+		print(bfs(graph, (i, j)), end = "")
+	print()
